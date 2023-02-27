@@ -14,7 +14,7 @@ from .managers import MyManager
 
 
 class MyUser(AbstractBaseUser, PermissionsMixin):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
     email = models.EmailField(_('email Address...'), unique=True)
     username = models.CharField(max_length=150, unique=True, blank=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
@@ -38,43 +38,30 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = _('user')
         verbose_name_plural = _('users')
         
-     
-   
-        
-        
-   
-        
-        
-    # def email_user(self, subject, message, from_email=None, **kwargs):
-    #     """
-    #         Sends an email to the user
-    #     """
-    #     send_mail(subject, message, from_email, [self.email], **kwargs)
+
         
         
     
 #Profile models
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=60, null=True)
-    other_name = models.CharField(max_length=60, null=True)
-    last_name = models.CharField(max_length=60, null=True)
+    first_name = models.CharField(max_length=60)
+    other_name = models.CharField(max_length=60)
+    last_name = models.CharField(max_length=60)
+    country = models.CharField(max_length=50)
     bio = models.TextField()
     location = models.CharField(max_length=300, blank=True)
     phone = models.CharField(max_length=20, blank=True)
     workin_at = models.CharField(max_length=150, blank=True)
-    profile_pic = models.ImageField(upload_to='profile_pics/', default='defaultpic.jpg', null=True, blank=True)
-    friends = models.ManyToManyField('Profile', blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pics/', default='default.jpg', null=True, blank=True)
     created = models.DateTimeField(auto_now=True)
     updated =  models.DateTimeField(auto_now=True)
+    
     
     
     def __str__(self):
         return self.user.username
     
-    
-    def __str__(self):
-        return self.get_full_name()
     
     def get_full_name(self):
         """
@@ -87,11 +74,8 @@ class Profile(models.Model):
         """
             returns the shortname for the user
         """
-        return self.username
-        
-        
-        
-        
+        return self.first_name
+    
     
 #A Function that creates a Profile immediately a user is created
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -102,6 +86,7 @@ def save_user_model(sender, instance, created, **kwargs):
         user_profile.friends.add(instance.profile)
         user_profile.save()
         
-        
-    
+
    
+    
+  

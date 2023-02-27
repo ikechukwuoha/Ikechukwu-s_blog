@@ -26,5 +26,9 @@ class UpdateForm(UserChangeForm):
         
         
         
-
+        
+class KnowMoreForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=60)
+    other_name = forms.CharField(max_length=60)
+    last_name = forms.CharField(max_length=60)
     

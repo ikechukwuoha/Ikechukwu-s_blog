@@ -13,6 +13,9 @@ def landinPage(request):
     return render(request, 'users/landingpage.html')
 
 
+
+
+
 def signUp(request):
     page = 'signup'
     user = get_user_model()

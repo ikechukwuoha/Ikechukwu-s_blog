@@ -7,7 +7,7 @@ app_name = 'users'
 
 
 urlpatterns = [
-   # path('', views.landinPage, name='landingpage'),
+    path('', views.landinPage, name='landingpage'),
     
     
     # Routes for Auhentication
