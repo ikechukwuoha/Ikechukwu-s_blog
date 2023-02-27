@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            Email: <input type="email" name="email" placeholder="A valid email here"> <br> <br>
+            Username: <input type="text" name="username" placeholder="Enter Your Username"> <br> <br>
+            Password: <input type="password" name="password1" placeholder="Enter your password"> <br> <br>
+            Password Confirmation: <input type="password" name="password2" placeholder="Confirm Your password"> <br>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
