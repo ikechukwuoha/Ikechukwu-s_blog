@@ -32,7 +32,7 @@ def signUp(request):
             user = form.save()
             login(request, user)
             messages.success(request, f"User Created Successfully...")
-            return redirect('users:more_about')
+            return redirect('users:profile')
         
         else:
             messages.error(request, f"Something Went Wrong, Please try again...")
@@ -55,7 +55,7 @@ def signIn(request):
     User = get_user_model()
     
     if request.user.is_authenticated:
-        return redirect('books:dashboard')
+        return redirect('blog:blog-home')
     
     # If the requst is a POST method, present the form
     if request.method == 'POST':
@@ -73,7 +73,7 @@ def signIn(request):
         if user is not None:
             login(request, user)
             messages.success(request, f"You've been Signed in")
-            return redirect('books:dashboard')
+            return redirect('blog:blog-home')
             
         else:
             messages.error(request, f"Please, Confirm You typed in the correct details...")       
@@ -91,3 +91,9 @@ def signOut(request):
     
     context = {'page': page}
     return render(request, 'users/signout.html', context)
+
+
+
+def Profile(request):
+    context = {}
+    return render(request, 'users/profile.html', context)

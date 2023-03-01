@@ -81,10 +81,8 @@ class Profile(models.Model):
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def save_user_model(sender, instance, created, **kwargs):
     if created:
-        user_profile = Profile(user=instance)
-        user_profile.save()
-        user_profile.friends.add(instance.profile)
-        user_profile.save()
+        Profile.objects.create(user=instance)
+    instance.profile.save()
         
 
    
